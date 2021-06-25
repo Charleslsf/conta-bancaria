@@ -3,9 +3,8 @@ package com.contaBancaria.controller;
 import com.contaBancaria.dto.ContaBancariaDTO;
 import com.contaBancaria.dto.ContaBancariaDetalheDTO;
 import com.contaBancaria.form.ContaBancariaForm;
-import com.contaBancaria.model.ContaBancaria;
-import com.contaBancaria.service.ContaBancariaService;
 import com.contaBancaria.repository.filter.ContaBancariaFilter;
+import com.contaBancaria.service.ContaBancariaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +27,7 @@ public class ContaBancariaController {
 	}
 
 	@GetMapping(path = "/detalhe", produces="application/json")
-	public ContaBancariaDetalheDTO findByConta(Integer numeroConta, @PageableDefault() Pageable pageable) {
+	public ContaBancariaDetalheDTO findByConta(Integer numeroConta) {
 		return ContaBancariaDetalheDTO.toDTO(contaBancariaService.findByConta(numeroConta));
 	}
 
