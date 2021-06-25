@@ -1,7 +1,9 @@
 package com.contaBancaria.controller;
 
 import com.contaBancaria.dto.ContaBancariaDTO;
+import com.contaBancaria.dto.ContaBancariaDetalheDTO;
 import com.contaBancaria.form.ContaBancariaForm;
+import com.contaBancaria.model.ContaBancaria;
 import com.contaBancaria.service.ContaBancariaService;
 import com.contaBancaria.repository.filter.ContaBancariaFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,13 @@ public class ContaBancariaController {
 	private ContaBancariaService contaBancariaService;
 
 	@GetMapping(produces="application/json")
-	public Page<ContaBancariaDTO> find(ContaBancariaFilter filtro, @PageableDefault() Pageable pageable) {
-		return contaBancariaService.findByFilter(filtro, pageable).map(ContaBancariaDTO::toDTO);
+	public Page<ContaBancariaDTO> findByFilter(ContaBancariaFilter filtro, @PageableDefault() Pageable pageable) {
+		return contaBancariaService.findByFilter(filtro, pageable).map(ContaBancariaDTO::create);
+	}
+
+	@GetMapping(path = "/detalhe", produces="application/json")
+	public ContaBancariaDetalheDTO findByConta(Integer numeroConta, @PageableDefault() Pageable pageable) {
+		return ContaBancariaDetalheDTO.toDTO(contaBancariaService.findByConta(numeroConta));
 	}
 
 	@PutMapping("/{id}")
@@ -33,7 +40,7 @@ public class ContaBancariaController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ContaBancariaDTO create(@RequestBody @Valid ContaBancariaForm contaBancariaForm) {
+	public ContaBancariaDetalheDTO create(@RequestBody @Valid ContaBancariaForm contaBancariaForm) {
 		return contaBancariaService.save(contaBancariaForm);
 	}
 

@@ -1,6 +1,6 @@
 package com.contaBancaria.service;
 
-import com.contaBancaria.dto.ContaBancariaDTO;
+import com.contaBancaria.dto.ContaBancariaDetalheDTO;
 import com.contaBancaria.exception.ResourceNotFoundException;
 import com.contaBancaria.form.ContaBancariaForm;
 import com.contaBancaria.model.ContaBancaria;
@@ -24,16 +24,21 @@ public class ContaBancariaService {
         return repository.findAll(ContaBancariaSpec.withFilter(filter), pageable);
     }
 
+
+    public ContaBancaria findByConta(Integer numeroConta) {
+        return repository.findByNumeroConta(numeroConta);
+    }
+
     public void update(Long id, ContaBancariaForm contaBancariaForm) {
         ContaBancaria contaBancaria = getContaBancariaById(id);
         contaBancariaForm.copyToModel(contaBancaria);
         repository.save(contaBancaria);
     }
 
-    public ContaBancariaDTO save(ContaBancariaForm contaBancariaForm) {
+    public ContaBancariaDetalheDTO save(ContaBancariaForm contaBancariaForm) {
         ContaBancaria contaBancaria = new ContaBancaria();
         contaBancariaForm.copyToModel(contaBancaria);
-        return ContaBancariaDTO.toDTO(repository.save(contaBancaria));
+        return ContaBancariaDetalheDTO.toDTO(repository.save(contaBancaria));
     }
 
     public void delete(Long id) {

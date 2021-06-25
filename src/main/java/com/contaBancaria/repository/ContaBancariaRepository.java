@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ContaBancariaRepository extends JpaRepository<ContaBancaria, Long>, JpaSpecificationExecutor<ContaBancaria> {
 
+    ContaBancaria findByNumeroConta(Integer numeroConta);
 }

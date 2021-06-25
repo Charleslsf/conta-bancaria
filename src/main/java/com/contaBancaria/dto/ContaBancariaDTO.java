@@ -1,48 +1,30 @@
 package com.contaBancaria.dto;
 
 import com.contaBancaria.model.ContaBancaria;
-import com.contaBancaria.util.Util;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.io.Serializable;
+import org.modelmapper.ModelMapper;
 
 @Getter @Setter
-public class ContaBancariaDTO implements Serializable {
+public class ContaBancariaDTO {
+
+    private Long id;
 
     private String nome;
 
-    private String ContaAgencia;
+    private Integer numeroConta;
 
-    private String chequeEspecialLiberado;
+    private Integer agencia;
 
-    private String saldo;
+    private Boolean chequeEspecialLiberado;
 
-    private String chequeEspecialCorrente;
+    private Double saldo;
 
-    private String chequeEspecialComJuros;
+    private Double chequeEspecial;
 
-    public static ContaBancariaDTO toDTO(ContaBancaria contaBancaria) {
-        ContaBancariaDTO dto = new ContaBancariaDTO();
-        dto.setNome(contaBancaria.getNome());
-        dto.setContaAgencia(getContaAgencia(contaBancaria));
-        dto.setChequeEspecialLiberado(getChequeEspecialLiberado(contaBancaria));
-        dto.setSaldo(Util.converterLocalCurrency(contaBancaria.getSaldo()));
-        dto.setChequeEspecialCorrente(Util.converterLocalCurrency(contaBancaria.getChequeEspecial()));
-        dto.setChequeEspecialComJuros(getChequeEspecialComJuros(contaBancaria));
-        return dto;
+    private Double taxa;
+
+    public static ContaBancariaDTO create(ContaBancaria contaBancaria) {
+        return new ModelMapper().map(contaBancaria, ContaBancariaDTO.class);
     }
-
-    private static String getChequeEspecialComJuros(ContaBancaria contaBancaria) {
-        return Util.converterLocalCurrency(((contaBancaria.getTaxa() + 100) / 100) * contaBancaria.getChequeEspecial());
-    }
-
-    private static String getContaAgencia(ContaBancaria contaBancaria) {
-        return contaBancaria.getNumeroConta() + " / " + contaBancaria.getAgencia();
-    }
-
-    private static String getChequeEspecialLiberado(ContaBancaria contaBancaria) {
-        return contaBancaria.getChequeEspecialLiberado() ? "Liberado" : "Não Liberado";
-    }
-
 }
