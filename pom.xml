@@ -8,11 +8,11 @@
 		<version>2.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.crudCliente</groupId>
-	<artifactId>crudCliente</artifactId>
+	<groupId>com.contaBancaria</groupId>
+	<artifactId>contaBancaria</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>crudCliente</name>
-	<description>Crud de Cliente</description>
+	<name>contaBancaria</name>
+	<description>Contas Bancarias</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -57,18 +57,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.9.2</version>
 		</dependency>
 
 		<dependency>

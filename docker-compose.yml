@@ -6,13 +6,13 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
-      POSTGRES_DB: CRUD_CLIENTE
+      POSTGRES_DB: CRUD_CONTA_BANCARIA
     ports:
       - "5432:5432"
     networks:
       - builders-network
-  crud-cliente:
-    image: crud-cliente
+  crud-conta-bancaria:
+    image: crud-conta-bancaria
     restart: always
     build:
       context: .
